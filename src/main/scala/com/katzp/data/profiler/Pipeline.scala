@@ -16,7 +16,7 @@ object Pipeline extends App with SparkWrapper with Utils {
   def run(config: Config): Unit = {
     logger.info(s"Starting run with config: ${config.toString}")
     val connectionMap = Map(
-      "sfUrl" -> "https://vistaprint.eu-west-1.snowflakecomputing.com",
+      "sfUrl" -> config.snowflakeUrl,
       "sfDatabase" -> config.db,
       "sfSchema" -> config.schema,
       "sfWarehouse" -> config.warehouse,

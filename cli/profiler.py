@@ -1,5 +1,4 @@
 import json
-import os
 from typing import Tuple
 import click
 import requests
@@ -40,7 +39,9 @@ def cli():
 @click.option("--password", required=True, help="Snowflake password")
 @click.option("--role", required=True, help="Snowflake role")
 @click.option("--warehouse", required=True, help="Snowflake warehouse")
+@click.option("--snowflake-url", required=True, help="Snowflake account url")
 @click.option("--host", required=True, help="Databricks host name")
+@click.option("--token", required=True, help="Databricks API token")
 def profile(
     table: str,
     column: Tuple[str],
@@ -52,13 +53,10 @@ def profile(
     password: str,
     role: str,
     warehouse: str,
+    snowflake_url: str,
     host: str,
+    token: str,
 ):
-    token = os.getenv("DNA_PROFILER_DATABRICKS_TOKEN")
-    if not token:
-        raise Exception(
-            "Environment variable DNA_PROFILER_DATABRICKS_TOKEN not set. Set with a Databricks token."
-        )
     payload = json.loads(CONFIG)
     profile_name = f"DnaProfiler-{table}-{tag}"
     payload["run_name"] = profile_name
@@ -83,6 +81,8 @@ def profile(
             role,
             "--warehouse",
             warehouse,
+            "--snowflake-url",
+            snowflake_url,
         ]
     )
     payload["spark_jar_task"]["parameters"] = jar_params
@@ -94,7 +94,7 @@ def profile(
     )
     if response.ok:
         click.echo(
-            "Submitted profiling job. Check Looker report in 5 minutes\nhttps://cimpress.eu.looker.com/dashboards-next/7961"
+            f"Submitted profiling job. Check ouput {database}.{schema}.data_profiler in 5 minutes"
         )
     else:
         click.echo(f"ERROR in submitting profiler job: {response.json()}")

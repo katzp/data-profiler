@@ -4,6 +4,7 @@ import scopt.OptionParser
 
 case class Config(
     qualifiedTableName: String = "",
+    snowflakeUrl: String = "",
     db: String = "",
     schema: String = "",
     user: String = "",
@@ -33,6 +34,11 @@ class ConfigParser extends OptionParser[Config]("data-profiler") {
       else failure("Must be in format [database].[schema].[table]")
     )
     .action((p, config) => config.copy(qualifiedTableName = p))
+
+  opt[String]("snowflake-url")
+    .text("Snowflake account url")
+    .required()
+    .action((p, config) => config.copy(snowflakeUrl = p))
 
   opt[String]("database")
     .text("Output database")
