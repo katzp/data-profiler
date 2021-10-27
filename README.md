@@ -1,36 +1,37 @@
 # DNA Data Profiler
-This is a lightweight profiler tool that saves column profile results in Snowflake but is mainly meant to be consumed by the following Looker report.
+This is a lightweight data profiler tool that wraps the deequ package & saves column profile results in Snowflake.
 
-https://cimpress.eu.looker.com/dashboards-next/7961
-
-This is meant as a way to create some profiling metrics after an ETL run and thus contains a CLI for submitting a new profiling job.
+This is meant as a way to create some profiling metrics after an ETL run and contains a CLI for submitting a new profiling job to Databricks
 
 ## Submitting a Profiling Job
 1. Install the CLI tool
 ```
-pip install dna-profiler --extra-index-url https://$DNA_ARTIFACTORY_CLIENT:$DNA_ARTIFACTORY_SECRET@vistaprint.jfrog.io/vistaprint/api/pypi/pypi-virtual/simple 
+git clone https://github.com/katzp/data-profiler.git
+cd data-profiler
+pip install .
 ```
-2. Set the following environment variable with Databricks API token. This should be a Databricks token from the DnA Common PRD environment.
+2. Submit a profiling job
+See below for usage text.
 ```
-export DNA_PROFILER_DATABRICKS_TOKEN=XXXXXXXXXXX
-```
-3. Submit a profiling job
-```
-dna-profiler profile --table vistaprint.transactions.order_info --tag my_first_profile
-```
-There are a few other CLI options. See below for usage text.
-```
-Usage: dna-profiler profile [OPTIONS]
+Usage: data-profiler profile [OPTIONS]
 
 Options:
-  --table TEXT       [Required] Snowflake table to profile with format [db].[schema].[table]
-  -c, --column TEXT  [Optional] Snowflake table columns to profile if you don't need all columns. Can specify  
-                     many. For example -c column_a -c column_b
-  --where TEXT       [Optional] Snowflake where predicate to filter rows to profile.
-                     For example --where "WEBSITE_LOCALE = 'US'"
-  --tag TEXT         [Optional] Tag to apply to profiling job. For helping to filter in Looker and grouping profiling jobs.
-  --help             Show this message and exit.
+  --table TEXT          Snowflake table to profile with format
+                        [db].[schema].[table]  [required]
+  -c, --column TEXT     [Optional] Snowflake table columns to profile. Can    
+                        specify many. For example -c column_a -c column_b etc 
+  --where TEXT          [Optional] Snowflake where predicate to filter rows to
+                        profile. For example --where "COUNTRY = 'US'"
+  --tag TEXT            [Optional] Tag to apply to profiling job. For helping 
+                        to filter in Looker.
+  --database TEXT       Snowflake database to save results  [required]        
+  --schema TEXT         Snowflake schema to save results  [required]
+  --user TEXT           Snowflake user  [required]
+  --password TEXT       Snowflake password  [required]
+  --role TEXT           Snowflake role  [required]
+  --warehouse TEXT      Snowflake warehouse  [required]
+  --snowflake-url TEXT  Snowflake account url  [required]
+  --host TEXT           Databricks host name  [required]
+  --token TEXT          Databricks API token  [required]
+  --help                Show this message and exit.
 ```
-4. Check back to the Looker report in about 5 minutes to see you results
-
-If you have questions reach out to pkatz@vistaprint.com

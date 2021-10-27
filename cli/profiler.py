@@ -26,15 +26,15 @@ def cli():
 @click.option(
     "--where",
     help="""
-    [Optional] Snowflake where predicate to filter rows to profile. For example --where "WEBSITE_LOCALE = 'US'"
+    [Optional] Snowflake where predicate to filter rows to profile. For example --where "COUNTRY = 'US'"
     """,
 )
 @click.option(
     "--tag",
     help="[Optional] Tag to apply to profiling job. For helping to filter in Looker.",
 )
-@click.option("--database", required=True, help="Snowflake database")
-@click.option("--schema", required=True, help="Snowflake schema")
+@click.option("--database", required=True, help="Snowflake database to save results")
+@click.option("--schema", required=True, help="Snowflake schema to save results")
 @click.option("--user", required=True, help="Snowflake user")
 @click.option("--password", required=True, help="Snowflake password")
 @click.option("--role", required=True, help="Snowflake role")
