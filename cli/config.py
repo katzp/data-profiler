@@ -21,7 +21,7 @@ CONFIG = """
             }
         },
         {
-            "jar": "dbfs:/FileStore/jars/dna-profiler_2.12-0.4.jar"
+            "jar": "dbfs:/FileStore/jars/data-profiler_2.12-0.4.jar"
         }
     ],
     "spark_jar_task": {

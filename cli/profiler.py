@@ -58,7 +58,7 @@ def profile(
     token: str,
 ):
     payload = json.loads(CONFIG)
-    profile_name = f"DnaProfiler-{table}-{tag}"
+    profile_name = f"DataProfiler-{table}-{tag}"
     payload["run_name"] = profile_name
     jar_params = ["--table", table]
     if column and len(column) > 0:
