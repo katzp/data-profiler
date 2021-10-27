@@ -2,14 +2,6 @@ CONFIG = """
 {
     "new_cluster": {
         "spark_version": "7.6.x-scala2.12",
-        "aws_attributes": {
-            "availability": "SPOT_WITH_FALLBACK",
-            "first_on_demand": 1,
-            "zone_id": "eu-west-1c",
-            "ebs_volume_type": "GENERAL_PURPOSE_SSD",
-            "ebs_volume_size": 100,
-            "ebs_volume_count": 3
-        },
         "node_type_id": "c4.4xlarge",
         "driver_node_type_id": "r4.4xlarge",
         "autoscale": {
@@ -33,6 +25,6 @@ CONFIG = """
         }
     ],
     "spark_jar_task": {
-        "main_class_name": "com.vistaprint.data.profiler.Pipeline"
+        "main_class_name": "com.katzp.data.profiler.Pipeline"
     }
 }"""
