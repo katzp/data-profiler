@@ -1,4 +1,4 @@
-# DNA Data Profiler
+# Data Profiler
 This is a lightweight data profiler tool that wraps the deequ package & saves column profile results in Snowflake.
 
 This is meant as a way to create some profiling metrics after an ETL run and contains a CLI for submitting a new profiling job to Databricks
