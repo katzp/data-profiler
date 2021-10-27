@@ -1,4 +1,4 @@
-name := "dna-profiler"
+name := "data-profiler"
 version := "0.4"
 scalaVersion := "2.12.10"
 val sparkVersion = "3.0.0"
