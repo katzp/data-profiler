@@ -1,0 +1,15 @@
+# intellij
+.bsp/
+.idea/
+
+# vs code
+.metals/
+.vscode/
+
+# sbt
+target/
+project/project/
+project/target/
+
+# python
+venv/
